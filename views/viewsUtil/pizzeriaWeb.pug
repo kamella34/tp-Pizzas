@@ -41,7 +41,7 @@ html
                             li 
                                 a(
                                 href="/accueilClient/Pizzas"
-                                class="link-underline-light link-body-emphasis"
+                                class="link-underline-light link-warning"
                                 ) Pizzas
                             li 
                                 a(
@@ -56,77 +56,128 @@ html
                             
                                 
                     div(class="position-absolute top-0 end-0")
-                        a(href='/accueilClient/MonCompte'
-                        class='text-decoration-none link-body-emphasis me-2'
-                        ) Mon compte
-                        a(href='/accueilClient/panier'
-                        class='text-decoration-none link-body-emphasis'
-                        ) Panier       
+                      
 
-        
-            main(class="position-absolute top-50 start-50 translate-middle")
+                        if utilConnected
+                            a(href='/accueilClient/deconnection'
+                            class='text-decoration-none link-warning me-2'
+                            ) Deconnection 
+                            a(href=''
+                            class='text-decoration-none link-body-emphasis'
+                            ) Panier #{counts ? counts : '0'}      
+                            p Bonjour #{utilConnected.prenom_utilisateur}
+                        else 
+                            a(href='/accueilClient/MonCompte'
+                            class='text-decoration-none link-warning me-2'
+                            ) Mon compte
+                            a(href=''
+                            class='text-decoration-none link-body-emphasis'
+                            ) Panier #{counts ? counts : '0'}     
+            
+            main(class="position-absolute top-50 start-50 translate-middle ")
 
-                h2(class=" p-5 text-center") Pizzas
-
+             div(class="border border-black m-2")
+                h6(class="m-4 text-info") Inscription
+                div
               
-                form(
-                method="POST"
-                class='m-4 d-flex flex-column align-items-center'
-                )
-                    div(class='w-25  d-flex flex-column')   
-                        label Prenom
-                        input(
+                    form(
+                    action='/accueilClient/inscription'    
+                    method="POST"
+                    class='m-4 d-flex flex-row align-items-center'
+                    )
+                        div(class='w-25  d-flex flex-column text-center')   
+                            label Prenom
+                            input(
                             class='m-3'
                             type='text'
                             name='prenomClient'
-                           
+                            
                             checked
                             ) 
-                    div(class='w-25  d-flex flex-column')
-                        label nom 
-                        input(
+                        div(class='w-25  d-flex flex-column text-center')
+                            label nom 
+                            input(
                             class='m-3'
                             type='text'
                             name='nomClient'
-                         
+                            
                             checked
                             )
-                    div(class='w-25  d-flex flex-column')        
-                        label mail 
-                    input(
+                        div(class='w-25  d-flex flex-column text-center')        
+                            label mail 
+                            input(
                             class='m-3'
                             type='text'
                             name='mailClient'
                             
                             checked
                             )        
-                    div(class='w-25  d-flex flex-column')   
-                        label adresse
-                        input(
+                        div(class='w-25  d-flex flex-column text-center')   
+                            label adresse
+                                input(
                             class='m-3'
                             type='text'
                             name='adresseClient'
-                       
-                            checked
-                            )
-                    div(class='w-25  d-flex flex-column')     
-                        label mdp
-                        input(
+                            
+                                hecked
+                                )
+                        div(class='w-25  d-flex flex-column text-center')     
+                            label mdp
+                            input(
                             class='m-3'
                             type='text'
                             name='mdpClient'
-                     
+                            
                             checked
                             )    
 
                         input(
-                            class='m-3 btn btn-success'
+                        class='m-3 btn btn-success'
+                        type='submit'
+                        name='btn'
+                        checked
+                            )    
+                            
+             div(class="border border-black m-2")                 
+                h6(class="m-4 text-info") Connexion
+                div
+                
+                    form(
+                    action='/accueilClient/connection'
+                    method="POST"
+                    class='m-4 d-flex flex-column align-items-center'
+                    )
+                        
+                        div(class='w-25  d-flex flex-column text-center')   
+                            label(
+                            for="mail_utilisateur"
+                            class=" m-2"
+                            ) Adresse mail
+                            input(
+                            type ="text" 
+                            id='mail_utilisateur' 
+                            name='mailCli'
+                            )
+                        div(class=' w-25 d-flex flex-column text-center')       
+                            label(
+                            for="mdp_utilisateur"
+                            class=" m-2"
+                            ) Mot de passe
+                            input(
+                            type="text" 
+                            id='mdp_utilisateur' 
+                            name='mdpCli' 
+                            )
+                        
+                        
+                            input(
+                            class='m-4 btn btn-success'
                             type='submit'
                             name='btn'
                             checked
-                            )     
+                            )       
+        
                 
-    
-          
-
-    
+        script(src="/socket.io/socket.io.js")
+        script(src="/client.js")
+        

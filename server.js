@@ -158,7 +158,8 @@ app.get('/accueilClient', async (req, res) => {
 app.get('/accueilClient/pizzas', async (req, res) => {
     const [displayPizza] = await pool$.execute('select * from pizzas')
     console.log(req.params.id);
-    res.render('viewsUtil/clipizzas', {   
+    res.render('viewsUtil/clipizzas', {  
+        utilConnected : utilConnected, 
         pizzas: displayPizza,
     })
 })
@@ -172,46 +173,51 @@ app.post('/accueilClient/pizzas', async (req, res) => {
 })
 
 app.get('/accueilClient', async (req, res) => {
-    res.render('viewsUtil/pizzeriaWeb', {     
+    res.render('viewsUtil/pizzeriaWeb', {  
+        utilConnected : utilConnected, 
     })
 })
 
 app.post('/accueilClient/pizzas', async (req, res) => { 
     console.log(req.body.id_pizza);
-    res.render('viewsUtil/clipizzas', {
-     pizzas: displayPizza,
-    })
+    res.redirect('viewsUtil/clipizzas')
 })
 
-//----------------------------Inscri---------------------------------
-
+//----------------------------Inscription----client---------------------------
 
 app.get('/accueilClient/MonCompte', async (req, res) => {
-    console.log('test');
     res.render('viewsUtil/pizzeriaWeb', {
-      
+        utilConnected : utilConnected,
     })
 })  
 
-// app.post('/accueilClient/MonCompte', async (req, res) => {
-//     const [insertClient] = await pool$.execute(`insert into utilisateurs (prenom_utilisateur,nom_utilisateur,adresse_utilisateur,mail_utilisateur,mdp_utilisateur,role_utilisateur) values(?,?,?,?,?,?)`, [req.body.prenomClient, req.body.nomClient, req.body.adresseClient, req.body.mailClient, req.body.mdpClient,'client']);
+app.post('/accueilClient/inscription', async (req, res) => {
+    console.log(req.body.prenomClient, req.body.nomClient, req.body.adresseClient, req.body.mailClient, req.body.mdpClient,'client');
+    const [insertClient] = await pool$.execute(`insert into utilisateurs (prenom_utilisateur,nom_utilisateur,adresse_utilisateur,mail_utilisateur,mdp_utilisateur,role_utilisateur) values(?,?,?,?,?,?)`, [req.body.prenomClient, req.body.nomClient, req.body.adresseClient, req.body.mailClient, req.body.mdpClient,'client']);
+    res.redirect('/accueilClient/MonCompte')
+})
 
-//     res.redirect('viewsUtil/pizzeriaWeb')
-   
-// })
+//--------------------------CONNEXION-----CLIENT-------------------------------
 
+app.post('/accueilClient/connection', async (req, res) => {
+   const recupMail = req.body.mailCli;
+    const recupMdp = req.body.mdpCli;
+    console.log(req.body.mailCli);
+    console.log(req.body.mdpCli);
+    const [[util]] = await pool$.execute(`SELECT * FROM utilisateurs WHERE mail_utilisateur=?`,[recupMail])
+    console.log(util);
+    if (util.mdp_utilisateur === recupMdp){
+        utilConnected = util
+    }
+    res.redirect('/accueilClient/MonCompte')
+})
+  
+app.get('/accueilClient/deconnection', async (req, res) => {
+    utilConnected = null
+    res.redirect('/accueilClient/MonCompte');
+})
 
-// app.post('/accueilClient/panier/:id', async (req, res) => {
-//     const [[recupPizza]] = await pool$.execute(`select * FROM pizza WHERE id_pizza=?`, [req.params.id],);
-//     console.log([recupPizza]);
-//     log(req.params.id)
-//     res.render('viewsUtil/clipanier', {
-//         title: 'PANIER',
-//         recupPizzas : recupPizza 
-//     })
-// })
-
-// _______________________CONNEXION___________________________________________
+// ------------------------------CONNEXION-----Admin-------------------------
 
 app.get('/accueilAdmin/connection', async (req, res) => {
     res.render('viewsAdmin/adminApp', {
@@ -238,17 +244,13 @@ app.get('/accueilAdmin/deconnection', async (req, res) => {
 })
 
 
+//_________________________________________________________________________________________
+
 
 io.on('connection', socket => {
   console.log('un client vient de se connecter avec socket.id=', socket.id)
   socket.emit('client:connecte:ok');
   });
-
-
-
-
-
-//_________________________________________________________________________________________
 
 server.listen('4000', () => {
     console.log('Started 4000!')

@@ -20,24 +20,33 @@ socket.emit('serveur:newPizza',(pizza)=>{
     
 let btnsAjout = document.querySelectorAll('.btnAjout');
 let displayCounts = document.querySelectorAll('.idcount');
-let btnRetirer = document.querySelectorAll('.btnRetirer');
+let btnsRetirer = document.querySelectorAll('.btnRetirer');
+let btnValider = document.querySelector('.btnValidePizza');
+let totalPizza = document.getElementById('total')
+let counts;
 
 for (let i = 0; i < btnsAjout.length; i++) {
   let count = 0;
   btnsAjout[i].addEventListener("click", (event) => {
     count++;
-    displayCounts[i].textContent = count;
-   
+    displayCounts[i].innerHTML = count;
   });
 
-  btnRetirer[i].addEventListener("click", (event) => {
+  btnsRetirer[i].addEventListener("click", (event) => {
     if (count > 0) {
       count--;
-      displayCounts[i].textContent = count;
-      
+      displayCounts[i].innerHTML = count; 
     }
   });
+
 }
 
-
-
+btnValider.addEventListener('click', (event) => {
+ counts = 0
+  for (let i = 0; i < displayCounts.length; i++) {
+    counts += parseInt(displayCounts[i].textContent);
+    totalPizza.innerHTML = `Panier ${counts}`
+  }
+ 
+});
+     

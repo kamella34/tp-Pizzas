@@ -53,15 +53,29 @@ html
                                 href=""
                                 class="link-underline-light link-body-emphasis"
                                 ) Boissons 
-                            
-                                
+                                                
                     div(class="position-absolute top-0 end-0")
-                        a(href='/accueilClient/MonCompte'
-                        class='text-decoration-none link-body-emphasis me-2'
-                        ) Mon compte
-                        a(href='/accueilClient/panier'
-                        class='text-decoration-none link-body-emphasis'
-                        ) Panier #{totalPizza}      
+                        if utilConnected
+                            a(href='/accueilClient/deconnection'
+                            class='text-decoration-none link-warning me-2'
+                            ) Deconnection 
+                            a(href=''
+                            class='text-decoration-none link-body-emphasis'
+                            id="total"
+                            ) Panier #{counts ? counts : '0'}     
+                            p Bonjour #{utilConnected.prenom_utilisateur}
+                        else 
+                            a(href='/accueilClient/MonCompte'
+                            class='text-decoration-none link-warning me-2'
+                            ) Mon compte
+                            a(href=''
+                            id="total"
+                            class='text-decoration-none link-body-emphasis'
+                            ) Panier #{counts ? counts : '0'}                           
+                                
+                                
+                       
+        
 
             main(class="position-absolute top-50 start-50 translate-middle ")
 
@@ -100,6 +114,16 @@ html
                                             type="button"
                                             name='btnRetirer'
                                             ) Retirer    
+
+                    button(
+                    class="btn btn-warning m-5 btnValidePizza"
+                    type="button"
+                    name='btnValidePizza'
+                    ) Envoyer au panier
+
+                   
+
+                                            
                     
         script(src="/socket.io/socket.io.js")
         script(src="/client.js")

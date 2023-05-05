@@ -61,7 +61,10 @@ html
                         ) Mon compte
                         a(href='accueilClient/panier'
                         class='text-decoration-none link-body-emphasis'
-                        ) Panier       
+                        ) Panier    
+
+                        if utilConnected
+                            p Bonjour #{utilConnected.prenom_utilisateur}   
 
                 h1(
                 class='text-center m-5'
