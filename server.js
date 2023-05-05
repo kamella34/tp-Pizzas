@@ -192,12 +192,12 @@ app.get('/accueilClient/MonCompte', async (req, res) => {
     })
 })  
 
-// app.post('/accueilClient/MonCompte', async (req, res) => {
-//     const [insertClient] = await pool$.execute(`insert into utilisateurs (prenom_utilisateur,nom_utilisateur,adresse_utilisateur,mail_utilisateur,mdp_utilisateur,role_utilisateur) values(?,?,?,?,?,?)`, [req.body.prenomClient, req.body.nomClient, req.body.adresseClient, req.body.mailClient, req.body.mdpClient,'client']);
+app.post('/accueilClient/MonCompte', async (req, res) => {
+    const [insertClient] = await pool$.execute(`insert into utilisateurs (prenom_utilisateur,nom_utilisateur,adresse_utilisateur,mail_utilisateur,mdp_utilisateur,role_utilisateur) values(?,?,?,?,?,?)`, [req.body.prenomClient, req.body.nomClient, req.body.adresseClient, req.body.mailClient, req.body.mdpClient,'client']);
 
-//     res.redirect('viewsUtil/pizzeriaWeb')
+    res.redirect('viewsUtil/pizzeriaWeb')
    
-// })
+})
 
 
 // app.post('/accueilClient/panier/:id', async (req, res) => {
