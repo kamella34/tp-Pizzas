@@ -1,0 +1,19 @@
+.logo{
+ width: 4rem;
+}
+
+.pizzachoix{
+    width: 8rem;
+}
+
+.btn1{
+    font-size:.2rem;
+}
+
+.p-categorie,.p-ingredient{
+font-size: .8rem;
+}
+
+.p-prix,.p-count{
+font-size: 1.2rem;
+}

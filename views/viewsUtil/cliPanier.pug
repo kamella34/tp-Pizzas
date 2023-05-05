@@ -1,0 +1,116 @@
+doctype html
+html
+    head
+        link(
+            href="/css/stylsheet.css"
+            rel="stylesheet" 
+            )  
+        link(
+            href="/css/reset.css"
+            rel="stylesheet" 
+            )  
+        link(
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet" 
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" 
+            crossorigin="anonymous"
+            )  
+        title=Super
+
+        body
+            header(class=" p-3")
+                div(class='position-relative')    
+                    a(href='/pizzeriaWeb'
+                    class="position-absolute top-0 start-0 link-underline-light"
+                    )
+                        img(src="/image/pizza.svg" class="logo")
+                        
+                        
+                    nav(class="position-absolute top-0 start-50 translate-middle-x") 
+                        ul(class="d-flex flex-row gap-3")  
+                            li
+                                a(
+                                href=""
+                                class="link-underline-light link-body-emphasis"
+                                ) Menus 
+                            li 
+                                a(
+                                href=""
+                                class="link-underline-light link-body-emphasis"
+                                ) Entrées
+                            li 
+                                a(
+                                href="/accueilClient/Pizzas"
+                                class="link-underline-light link-warning"
+                                ) Pizzas
+                            li 
+                                a(
+                                href=""
+                                class="link-underline-light link-body-emphasis"
+                                ) Desserts
+                            li 
+                                a(
+                                href=""
+                                class="link-underline-light link-body-emphasis"
+                                ) Boissons 
+                            
+                                
+                    div(class="position-absolute top-0 end-0")
+                        a(href=''
+                        class='text-decoration-none link-body-emphasis me-2'
+                        ) Mon compte
+                        a(href='accueilClient/panier'
+                        class='text-decoration-none link-body-emphasis'
+                        ) Panier       
+
+                h1(
+                class='text-center m-5'
+                ) #{titre}
+
+            main(class="position-absolute top-50 start-50 translate-middle")
+
+            h2(class=" p-5 text-center") Panier
+                table(
+                    class='text-center d-flex justify-content-center m-5 '
+                    ) 
+                        tr(
+                        class='border'
+                        )  
+                            td(
+                            class='border border-black p-2'
+                            ) Prenom
+                            td(
+                            class='border border-black p-2'
+                            ) Nom
+                            td(
+                            class='border border-black p-2'
+                            ) Adresse
+                            td(
+                            class='border border-black p-2'
+                            ) Mail
+
+            
+
+
+            //- h2(class=" p-5 text-center") Pizzas
+            //-     tr(
+            //-     class='border border-success text-success '
+            //-     ) 
+            //-         td(
+            //-         class='border border-success p-2'
+            //-         ) #{recupPizza.id_pizza}
+            //-         td(
+            //-         class='border border-success p-2'
+            //-         ) #{recupPizza.code_pizza}
+            //-         td(
+            //-         class='border border-success p-2'
+            //-         ) #{recupPizza.libellé_pizza}
+            //-         td(
+            //-         class='border border-success p-2'
+            //-         ) #{recupPizza.ingredient_pizza}
+            //-         td(
+            //-         class='border border-success p-2'
+            //-         ) #{recupPizza.categorie_pizza}
+            //-         td(
+            //-         class='border border-success p-2'
+            //-         ) #{recupPizza.prix_pizza}

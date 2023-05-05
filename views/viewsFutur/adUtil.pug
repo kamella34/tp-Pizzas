@@ -1,0 +1,66 @@
+doctype html
+html
+    head
+        link(
+            href="/css/stylsheet.css"
+            rel="stylesheet" 
+            )  
+        link(
+            href="/css/reset.css"
+            rel="stylesheet" 
+            )  
+        link(
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet" 
+            integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" 
+            crossorigin="anonymous"
+            )  
+        title=Super
+
+        body
+            header 
+
+            main
+                table(
+                    class='border border-success w-25 align-self-center m-5'
+                    ) 
+                    tr(
+                    class='border border-success text-success'
+                    )  
+                        td(
+                        class='border border-success p-2'
+                        ) Id client 
+                        td(
+                        class='border border-success p-2'
+                        ) Nom
+                        td(
+                        class='border border-success p-2'
+                        ) Prenom
+                        td(
+                        class='border border-success p-2'
+                        ) Adresse
+                        td(
+                        class='border border-success p-2'
+                        ) Email
+                        
+                    
+                    each client in clients     
+                        tr(
+                        class='border border-success text-success '
+                        ) 
+                            td(
+                            class='border border-success p-2'
+                            ) #{client.id_client}
+                            td(
+                            class='border border-success p-2'
+                            ) #{client.nom_client}
+                            td(
+                            class='border border-success p-2'
+                            ) #{client.prenom_client}
+                            td(
+                            class='border border-success p-2'
+                            ) #{client.adresse_client}
+                            td(
+                            class='border border-success p-2'
+                            ) #{client.email_client}
+
